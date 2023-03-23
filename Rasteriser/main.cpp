@@ -10,12 +10,12 @@ int main()
 {
 	constexpr int16_t width{ 1600 };
 	constexpr int16_t height{ 800 };
-	Colour pixelColourBuffer{};
+	PixelColourBuffer pixelColourBuffer{}; // r g b values for all the pixels on the screen
 	uint32_t pixelColour{}; // for putting the channels into
 	bool isRunning = true;
 	SDL_Event event{};
 
-	// setting the colour channel sizes to the screen and putting them into a singular vector
+	// setting the colour channel sizes to the screen size
 	pixelColourBuffer.r.resize(height, std::vector<uint8_t>(width, 0));
 	pixelColourBuffer.g.resize(height, std::vector<uint8_t>(width, 0));
 	pixelColourBuffer.b.resize(height, std::vector<uint8_t>(width, 0));
@@ -61,9 +61,12 @@ int main()
 			{
 				isRunning = false;
 			}
-			
+
+			//drawWireTriangle(Vector2d(500, 500), Vector2d(800, 50), Vector2d(1590, 700), pixelColourBuffer, RGB {255,255,255});
+			drawFilledTriangle(Vector2d(500, 500), Vector2d(800, 50), Vector2d(1590, 700), pixelColourBuffer, RGB {0,255,0});
+
 			// set background colour
-			//SDL_SetRenderDrawColor(pRenderer, 255, 0, 0, 255);
+			//SDL_SetRenderDrawColjor(pRenderer, 255, 0, 0, 255);
 			//SDL_RenderClear(pRenderer);
 
 			uint32_t* tempPixels = new uint32_t[height * width];
@@ -73,7 +76,7 @@ int main()
 			{
 				for (int x{}; x < width; ++x)
 				{
-					pixelColour = (255 << 24) + (pixelColourBuffer.r.at(y).at(x) << 16) + (pixelColourBuffer.g.at(y).at(x) << 8) + pixelColourBuffer.g.at(y).at(x);
+					pixelColour = (255 << 24) + (pixelColourBuffer.r.at(y).at(x) << 16) + (pixelColourBuffer.g.at(y).at(x) << 8) + pixelColourBuffer.b.at(y).at(x);
 					tempPixels[(y * width) + x] = pixelColour;
 				}
 			}
