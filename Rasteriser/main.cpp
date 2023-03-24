@@ -3,6 +3,7 @@
 #include <Eigen/Dense>
 #include <iostream>
 #include <vector>
+#include <array>
 #include <stdexcept>
 
 #undef main
@@ -62,8 +63,8 @@ int main()
 				isRunning = false;
 			}
 
-			//drawWireTriangle(Vector2d(500, 500), Vector2d(800, 50), Vector2d(1590, 700), pixelColourBuffer, RGB {255,255,255});
-			drawFilledTriangle(Vector2d(500, 500), Vector2d(800, 50), Vector2d(1590, 700), pixelColourBuffer, RGB {0,255,0});
+			//drawFilledTriangle(Vector2d(100, 500), Vector2d(800, 50), Vector2d(1590, 700), pixelColourBuffer, RGB {255,255,255});
+			drawShadedTriangle(Vector2d(100, 500), Vector2d(800, 50), Vector2d(1590, 700), pixelColourBuffer, RGB {0,255,0}, std::array<double, 3> {1.0, 0.1, 0.1});
 
 			// set background colour
 			//SDL_SetRenderDrawColjor(pRenderer, 255, 0, 0, 255);
