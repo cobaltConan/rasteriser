@@ -24,3 +24,5 @@ void drawLine(Vector2d p0, Vector2d p1, PixelColourBuffer &pixelColourBuffer, RG
 void drawWireTriangle(Vector2d p0, Vector2d p1, Vector2d p2, PixelColourBuffer& pixelColourBuffer, RGB colours);
 void drawFilledTriangle(Vector2d p0, Vector2d p1, Vector2d p2, PixelColourBuffer& pixelColourBuffer, RGB colours);
 void drawShadedTriangle(Vector2d p0, Vector2d p1, Vector2d p2, PixelColourBuffer& pixelColourBuffer, RGB colours, std::array<double, 3> h);
+Vector2d viewportToCanvas(Vector2d point, int16_t cWidth, int16_t cHeight);
+Eigen::Matrix<int32_t, 3, 1> projectVertex(Eigen::Vector3d vert, int16_t cWidth, int16_t cHeight);

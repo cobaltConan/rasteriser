@@ -249,3 +249,18 @@ void drawShadedTriangle(Vector2d p0, Vector2d p1, Vector2d p2, PixelColourBuffer
 	}
 
 }
+
+
+Vector2d viewportToCanvas(Vector2d point, int16_t cWidth, int16_t cHeight)
+{
+	Vector2d returnPoint{};
+	double vWidth{ 2 }; // width of the viewport
+	double vHeight{ 1 }; // height of the viewport
+
+	cWidth = static_cast<double>(cWidth);
+	cHeight = static_cast<double>(cHeight);
+	returnPoint.x() = point.x() * (cWidth / vWidth);
+	returnPoint.y() = point.y() * (cHeight / vHeight);
+	
+	return returnPoint;
+}
