@@ -5,10 +5,38 @@
 #include <vector>
 #include <array>
 #include <stdexcept>
+#include <algorithm>
 
 #undef main
 int main()
 {
+	// Testing area
+
+	std::vector<Eigen::Vector3d*> verticies{};
+
+	Eigen::Vector3d vAf{ -2,-0.5,5 };
+	Eigen::Vector3d vBf{ -2, 0.5,5 };
+	Eigen::Vector3d vCf{ -1, 0.5,5 };
+	Eigen::Vector3d vDf{ -1,-0.5,5 };
+	Eigen::Vector3d vAb{ -2,-0.5,6 };
+	Eigen::Vector3d vBb{ -2, 0.5,6 };
+	Eigen::Vector3d vCb{ -1, 0.5,6 };
+	Eigen::Vector3d vDb{ -1,-0.5,6 };
+
+	verticies.emplace_back(&vAf);
+	verticies.emplace_back(&vBf);
+	verticies.emplace_back(&vCf);
+	verticies.emplace_back(&vDf);
+	verticies.emplace_back(&vAb);
+	verticies.emplace_back(&vBb);
+	verticies.emplace_back(&vCb);
+	verticies.emplace_back(&vDb);
+
+	bool to_right{ true };
+
+	// End of testing area
+	
+	double camDistance = 1;
 	constexpr int16_t width{ 1600 };
 	constexpr int16_t height{ 800 };
 	PixelColourBuffer pixelColourBuffer{}; // r g b values for all the pixels on the screen
@@ -62,42 +90,80 @@ int main()
 			{
 				isRunning = false;
 			}
-
-			//drawFilledTriangle(Vector2d(100, 500), Vector2d(800, 50), Vector2d(1590, 700), pixelColourBuffer, RGB {255,255,255});
-			drawShadedTriangle(Vector2d(100, 500), Vector2d(800, 50), Vector2d(1590, 700), pixelColourBuffer, RGB {0,255,0}, std::array<double, 3> {1.0, 0.1, 0.1});
-
-			// set background colour
-			//SDL_SetRenderDrawColjor(pRenderer, 255, 0, 0, 255);
-			//SDL_RenderClear(pRenderer);
-
-			uint32_t* tempPixels = new uint32_t[height * width];
-			memset(tempPixels, 0, width * height * sizeof(uint32_t));
-
-			for (int y{}; y < height; ++y)
-			{
-				for (int x{}; x < width; ++x)
-				{
-					pixelColour = (255 << 24) + (pixelColourBuffer.r.at(y).at(x) << 16) + (pixelColourBuffer.g.at(y).at(x) << 8) + pixelColourBuffer.b.at(y).at(x);
-					tempPixels[(y * width) + x] = pixelColour;
-				}
-			}
-
-			SDL_UpdateTexture(pTexture, NULL, tempPixels, width * sizeof(uint32_t));
-			
-			delete[] tempPixels;
-
-			// copying texture to the renderer
-			SDL_Rect srcRect{}, bounds{};
-			srcRect.x = 0;
-			srcRect.y = 0;
-			srcRect.w = width;
-			srcRect.h = height;
-			bounds = srcRect;
-			SDL_RenderCopy(pRenderer, pTexture, &srcRect, &bounds);
-
-			// render to screen
-			SDL_RenderPresent(pRenderer);
 		}
+
+		for (int i{}; i < 8; ++i)
+		{
+			if (to_right)
+			{
+				verticies.at(i)->x() += 0.1;
+				verticies.at(i)->y() += 0.03;
+			}
+			else
+			{
+				verticies.at(i)->x() -= 0.1;
+				verticies.at(i)->y() -= 0.03;
+			}
+		}
+
+		if (verticies.at(0)->x() > 2)
+			to_right = false;
+		if (verticies.at(0)->x() < -3)
+			to_right = true;
+
+		drawLine(projectVertex(vAf, width, height, camDistance), projectVertex(vBf, width, height, camDistance), pixelColourBuffer, RGB{ 0, 0, 255 });
+		drawLine(projectVertex(vBf, width, height, camDistance), projectVertex(vCf, width, height, camDistance), pixelColourBuffer, RGB{ 0, 0, 255 });
+		drawLine(projectVertex(vCf, width, height, camDistance), projectVertex(vDf, width, height, camDistance), pixelColourBuffer, RGB{ 0, 0, 255 });
+		drawLine(projectVertex(vDf, width, height, camDistance), projectVertex(vAf, width, height, camDistance), pixelColourBuffer, RGB{ 0, 0, 255 });
+
+		drawLine(projectVertex(vAb, width, height, camDistance), projectVertex(vBb, width, height, camDistance), pixelColourBuffer, RGB{ 255, 0, 0 });
+		drawLine(projectVertex(vBb, width, height, camDistance), projectVertex(vCb, width, height, camDistance), pixelColourBuffer, RGB{ 255, 0, 0 });
+		drawLine(projectVertex(vCb, width, height, camDistance), projectVertex(vDb, width, height, camDistance), pixelColourBuffer, RGB{ 255, 0, 0 });
+		drawLine(projectVertex(vDb, width, height, camDistance), projectVertex(vAb, width, height, camDistance), pixelColourBuffer, RGB{ 255, 0, 0 });
+		
+		drawLine(projectVertex(vAf, width, height, camDistance), projectVertex(vAb, width, height, camDistance), pixelColourBuffer, RGB{ 0, 255, 0 });
+		drawLine(projectVertex(vBf, width, height, camDistance), projectVertex(vBb, width, height, camDistance), pixelColourBuffer, RGB{ 0, 255, 0 });
+		drawLine(projectVertex(vCf, width, height, camDistance), projectVertex(vCb, width, height, camDistance), pixelColourBuffer, RGB{ 0, 255, 0 });
+		drawLine(projectVertex(vDf, width, height, camDistance), projectVertex(vDb, width, height, camDistance), pixelColourBuffer, RGB{ 0, 255, 0 });
+
+		// set background colour
+		//SDL_SetRenderDrawColjor(pRenderer, 255, 0, 0, 255);
+		//SDL_RenderClear(pRenderer);
+
+		uint32_t* tempPixels = new uint32_t[height * width];
+		memset(tempPixels, 0, width * height * sizeof(uint32_t));
+
+		for (int y{}; y < height; ++y)
+		{
+			for (int x{}; x < width; ++x)
+			{
+				pixelColour = (255 << 24) + (pixelColourBuffer.r.at(y).at(x) << 16) + (pixelColourBuffer.g.at(y).at(x) << 8) + pixelColourBuffer.b.at(y).at(x);
+				tempPixels[(y * width) + x] = pixelColour;
+			}
+		}
+
+		SDL_UpdateTexture(pTexture, NULL, tempPixels, width * sizeof(uint32_t));
+		
+		delete[] tempPixels;
+		
+		for (int i{}; i < pixelColourBuffer.r.size(); ++i)
+		{
+			std::fill(pixelColourBuffer.r.at(i).begin(), pixelColourBuffer.r.at(i).end(), 0);
+			std::fill(pixelColourBuffer.g.at(i).begin(), pixelColourBuffer.g.at(i).end(), 0);
+			std::fill(pixelColourBuffer.b.at(i).begin(), pixelColourBuffer.b.at(i).end(), 0);
+		}
+
+		// copying texture to the renderer
+		SDL_Rect srcRect{}, bounds{};
+		srcRect.x = 0;
+		srcRect.y = 0;
+		srcRect.w = width;
+		srcRect.h = height;
+		bounds = srcRect;
+		SDL_RenderCopy(pRenderer, pTexture, &srcRect, &bounds);
+
+		// render to screen
+		SDL_RenderPresent(pRenderer);
 	}
 
 	// tidy up

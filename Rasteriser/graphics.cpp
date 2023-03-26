@@ -256,11 +256,26 @@ Vector2d viewportToCanvas(Vector2d point, int16_t cWidth, int16_t cHeight)
 	Vector2d returnPoint{};
 	double vWidth{ 2 }; // width of the viewport
 	double vHeight{ 1 }; // height of the viewport
+	double cWidthD{}, cHeightD{};
 
-	cWidth = static_cast<double>(cWidth);
-	cHeight = static_cast<double>(cHeight);
-	returnPoint.x() = point.x() * (cWidth / vWidth);
-	returnPoint.y() = point.y() * (cHeight / vHeight);
+	cWidthD = static_cast<double>(cWidth);
+	cHeightD = static_cast<double>(cHeight);
+	returnPoint.x() = (point.x() * (cWidthD / vWidth)) + cWidthD / 2; // shifting by half distance due to difference in coordinate systems
+	returnPoint.y() = (point.y() * (cHeightD / vHeight)) + cHeightD / 2; // shifting by half distance due to difference in coordinate systems
+
 	
 	return returnPoint;
+}
+
+
+Vector2d projectVertex(Eigen::Vector3d vert, int16_t cWidth, int16_t cHeight, double camDistance)
+{
+	Vector2d returnVert{};
+
+	returnVert.x() = (vert.x() * camDistance) / vert.z();
+	returnVert.y() = (vert.y() * camDistance) / vert.z();
+
+	returnVert = viewportToCanvas(returnVert, cWidth, cHeight);
+
+	return returnVert;
 }
