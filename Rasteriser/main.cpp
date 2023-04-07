@@ -11,28 +11,47 @@
 int main()
 {
 	// Testing area
+	#define RED RGB{255, 0, 0}
+	#define GREEN RGB{0, 255, 0}
+	#define BLUE RGB{0, 0, 255}
+	#define YELLOW RGB{255, 255, 0}
+	#define PURPLE RGB{255, 0, 255}
+	#define CYAN RGB{0, 255, 255}
 
-	std::vector<Eigen::Vector3d*> verticies{};
+	// verticies
+	std::vector<Vector3d> verticies
+	{
+		Vector3d{ 1,  1,  1},
+		Vector3d{-1,  1,  1},
+		Vector3d{-1, -1,  1},
+		Vector3d{ 1, -1,  1},
+		Vector3d{ 1,  1, -1},
+		Vector3d{-1,  1, -1},
+		Vector3d{-1, -1, -1},
+		Vector3d{ 1, -1, -1}
+	};
 
-	Eigen::Vector3d vAf{ -2,-0.5,5 };
-	Eigen::Vector3d vBf{ -2, 0.5,5 };
-	Eigen::Vector3d vCf{ -1, 0.5,5 };
-	Eigen::Vector3d vDf{ -1,-0.5,5 };
-	Eigen::Vector3d vAb{ -2,-0.5,6 };
-	Eigen::Vector3d vBb{ -2, 0.5,6 };
-	Eigen::Vector3d vCb{ -1, 0.5,6 };
-	Eigen::Vector3d vDb{ -1,-0.5,6 };
+	for (auto& element : verticies)
+	{
+		element.x() -= 3;
+		element.z() += 7;
+	}
 
-	verticies.emplace_back(&vAf);
-	verticies.emplace_back(&vBf);
-	verticies.emplace_back(&vCf);
-	verticies.emplace_back(&vDf);
-	verticies.emplace_back(&vAb);
-	verticies.emplace_back(&vBb);
-	verticies.emplace_back(&vCb);
-	verticies.emplace_back(&vDb);
-
-	bool to_right{ true };
+	std::vector<Triangle> triangles
+	{
+		Triangle{0, 1, 2, RED},
+		Triangle{0, 2, 3, RED},
+		Triangle{4, 0, 3, GREEN},
+		Triangle{4, 3, 7, GREEN},
+		Triangle{5, 4, 7, BLUE},
+		Triangle{5, 7, 6, BLUE},
+		Triangle{1, 5, 6, YELLOW},
+		Triangle{1, 6, 2, YELLOW},
+		Triangle{4, 5, 1, PURPLE},
+		Triangle{4, 1, 0, PURPLE},
+		Triangle{2, 6, 7, CYAN},
+		Triangle{2, 7, 3, CYAN},
+	};
 
 	// End of testing area
 	
@@ -92,43 +111,11 @@ int main()
 			}
 		}
 
-		for (int i{}; i < 8; ++i)
-		{
-			if (to_right)
-			{
-				verticies.at(i)->x() += 0.1;
-				verticies.at(i)->y() += 0.03;
-			}
-			else
-			{
-				verticies.at(i)->x() -= 0.1;
-				verticies.at(i)->y() -= 0.03;
-			}
-		}
-
-		if (verticies.at(0)->x() > 2)
-			to_right = false;
-		if (verticies.at(0)->x() < -3)
-			to_right = true;
-
-		drawLine(projectVertex(vAf, width, height, camDistance), projectVertex(vBf, width, height, camDistance), pixelColourBuffer, RGB{ 0, 0, 255 });
-		drawLine(projectVertex(vBf, width, height, camDistance), projectVertex(vCf, width, height, camDistance), pixelColourBuffer, RGB{ 0, 0, 255 });
-		drawLine(projectVertex(vCf, width, height, camDistance), projectVertex(vDf, width, height, camDistance), pixelColourBuffer, RGB{ 0, 0, 255 });
-		drawLine(projectVertex(vDf, width, height, camDistance), projectVertex(vAf, width, height, camDistance), pixelColourBuffer, RGB{ 0, 0, 255 });
-
-		drawLine(projectVertex(vAb, width, height, camDistance), projectVertex(vBb, width, height, camDistance), pixelColourBuffer, RGB{ 255, 0, 0 });
-		drawLine(projectVertex(vBb, width, height, camDistance), projectVertex(vCb, width, height, camDistance), pixelColourBuffer, RGB{ 255, 0, 0 });
-		drawLine(projectVertex(vCb, width, height, camDistance), projectVertex(vDb, width, height, camDistance), pixelColourBuffer, RGB{ 255, 0, 0 });
-		drawLine(projectVertex(vDb, width, height, camDistance), projectVertex(vAb, width, height, camDistance), pixelColourBuffer, RGB{ 255, 0, 0 });
-		
-		drawLine(projectVertex(vAf, width, height, camDistance), projectVertex(vAb, width, height, camDistance), pixelColourBuffer, RGB{ 0, 255, 0 });
-		drawLine(projectVertex(vBf, width, height, camDistance), projectVertex(vBb, width, height, camDistance), pixelColourBuffer, RGB{ 0, 255, 0 });
-		drawLine(projectVertex(vCf, width, height, camDistance), projectVertex(vCb, width, height, camDistance), pixelColourBuffer, RGB{ 0, 255, 0 });
-		drawLine(projectVertex(vDf, width, height, camDistance), projectVertex(vDb, width, height, camDistance), pixelColourBuffer, RGB{ 0, 255, 0 });
-
 		// set background colour
-		//SDL_SetRenderDrawColjor(pRenderer, 255, 0, 0, 255);
+		//SDL_SetRenderDrawColor(pRenderer, 255, 255, 0, 255);
 		//SDL_RenderClear(pRenderer);
+
+		renderObject(verticies, triangles, pixelColourBuffer, width, height, camDistance);
 
 		uint32_t* tempPixels = new uint32_t[height * width];
 		memset(tempPixels, 0, width * height * sizeof(uint32_t));

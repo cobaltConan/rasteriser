@@ -268,7 +268,7 @@ Vector2d viewportToCanvas(Vector2d point, int16_t cWidth, int16_t cHeight)
 }
 
 
-Vector2d projectVertex(Eigen::Vector3d vert, int16_t cWidth, int16_t cHeight, double camDistance)
+Vector2d projectVertex(Vector3d vert, int16_t cWidth, int16_t cHeight, double camDistance)
 {
 	Vector2d returnVert{};
 
@@ -278,4 +278,32 @@ Vector2d projectVertex(Eigen::Vector3d vert, int16_t cWidth, int16_t cHeight, do
 	returnVert = viewportToCanvas(returnVert, cWidth, cHeight);
 
 	return returnVert;
+}
+
+
+void renderObject(std::vector<Vector3d> verticies, std::vector<Triangle> triangles, PixelColourBuffer& pixelColourBuffer, int16_t cWidth, int16_t cHeight, double camDistance)
+{
+	std::vector<Vector2d> projectVerticies;
+
+	for (auto& vertex : verticies)
+	{
+		projectVerticies.emplace_back(projectVertex(vertex, cWidth, cHeight, camDistance));
+	}
+
+	for (auto& triangle : triangles)
+	{
+		renderTriangle(triangle, projectVerticies, pixelColourBuffer);
+	}
+}
+
+
+void renderTriangle(Triangle triangle, std::vector<Vector2d> projectedVerticies, PixelColourBuffer& pixelColourBuffer)
+{
+	drawWireTriangle(
+		projectedVerticies.at(triangle.v0),
+		projectedVerticies.at(triangle.v1),
+		projectedVerticies.at(triangle.v2),
+		pixelColourBuffer,
+		triangle.colour
+	);
 }

@@ -4,6 +4,7 @@
 #include <Eigen/Dense>
 
 using Eigen::Vector2d;
+using Eigen::Vector3d;
 
 struct PixelColourBuffer
 {
@@ -19,10 +20,20 @@ struct RGB
 	uint8_t b;
 };
 
+struct Triangle
+{
+	int16_t v0;
+	int16_t v1;
+	int16_t v2;
+	RGB colour;
+};
+
 std::vector<double> interpolate(int32_t i0, double d0, int32_t i1, double d1);
 void drawLine(Vector2d p0, Vector2d p1, PixelColourBuffer &pixelColourBuffer, RGB colours);
 void drawWireTriangle(Vector2d p0, Vector2d p1, Vector2d p2, PixelColourBuffer& pixelColourBuffer, RGB colours);
 void drawFilledTriangle(Vector2d p0, Vector2d p1, Vector2d p2, PixelColourBuffer& pixelColourBuffer, RGB colours);
 void drawShadedTriangle(Vector2d p0, Vector2d p1, Vector2d p2, PixelColourBuffer& pixelColourBuffer, RGB colours, std::array<double, 3> h);
 Vector2d viewportToCanvas(Vector2d point, int16_t cWidth, int16_t cHeight);
-Vector2d projectVertex(Eigen::Vector3d vert, int16_t cWidth, int16_t cHeight, double camDistance);
+Vector2d projectVertex(Vector3d vert, int16_t cWidth, int16_t cHeight, double camDistance);
+void renderObject(std::vector<Vector3d> verticies, std::vector<Triangle> triangles, PixelColourBuffer& pixelColourBuffer, int16_t cWidth, int16_t cHeight, double camDistance);
+void renderTriangle(Triangle triangle, std::vector<Vector2d> projectedVerticies, PixelColourBuffer& pixelColourBuffer);
