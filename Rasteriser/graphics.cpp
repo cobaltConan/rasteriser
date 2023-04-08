@@ -50,6 +50,7 @@ void drawLine(Vector2d p0, Vector2d p1, PixelColourBuffer &pixelColourBuffer, RG
 			pixelColourBuffer.g.at(y).at(x) = colours.g;
 			pixelColourBuffer.b.at(y).at(x) = colours.b;
 		}
+
 	}
 
 	else
@@ -306,4 +307,34 @@ void renderTriangle(Triangle triangle, std::vector<Vector2d> projectedVerticies,
 		pixelColourBuffer,
 		triangle.colour
 	);
+}
+
+
+void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, int16_t cWidth, int16_t cHeight, double camDistance)
+{
+	std::vector<Vector2d> projectedVerticies;
+
+	auto model{ instance.returnModel() };
+
+	Vector3d movedVertex{};
+
+	for (auto& vertex : model.verticies)
+	{
+		movedVertex = vertex + instance.position;
+		projectedVerticies.emplace_back(projectVertex(movedVertex, cWidth, cHeight, camDistance));
+	}
+
+	for (auto& triangle : model.triangles)
+	{
+		renderTriangle(triangle, projectedVerticies, pixelColourBuffer);
+	}
+}
+
+
+void renderScene(scene scene, PixelColourBuffer& pixelColourBuffer, int16_t cWidth, int16_t cHeight, double camDistance)
+{
+	for (auto& instance : scene.instances)
+	{
+		renderInstance(instance, pixelColourBuffer, cWidth, cHeight, camDistance);
+	}
 }

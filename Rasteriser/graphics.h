@@ -1,3 +1,4 @@
+#include <objects.h>
 #include <vector>
 #include <array>
 #include <cmath>
@@ -13,20 +14,6 @@ struct PixelColourBuffer
 	std::vector<std::vector<uint8_t>> b;
 };
 
-struct RGB
-{
-	uint8_t r;
-	uint8_t g;
-	uint8_t b;
-};
-
-struct Triangle
-{
-	int16_t v0;
-	int16_t v1;
-	int16_t v2;
-	RGB colour;
-};
 
 std::vector<double> interpolate(int32_t i0, double d0, int32_t i1, double d1);
 void drawLine(Vector2d p0, Vector2d p1, PixelColourBuffer &pixelColourBuffer, RGB colours);
@@ -37,3 +24,6 @@ Vector2d viewportToCanvas(Vector2d point, int16_t cWidth, int16_t cHeight);
 Vector2d projectVertex(Vector3d vert, int16_t cWidth, int16_t cHeight, double camDistance);
 void renderObject(std::vector<Vector3d> verticies, std::vector<Triangle> triangles, PixelColourBuffer& pixelColourBuffer, int16_t cWidth, int16_t cHeight, double camDistance);
 void renderTriangle(Triangle triangle, std::vector<Vector2d> projectedVerticies, PixelColourBuffer& pixelColourBuffer);
+void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, int16_t cWidth, int16_t cHeight, double camDistance);
+void renderScene(scene scene, PixelColourBuffer& pixelColourBuffer, int16_t cWidth, int16_t cHeight, double camDistance);
+

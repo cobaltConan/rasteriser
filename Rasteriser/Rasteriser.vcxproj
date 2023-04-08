@@ -21,9 +21,11 @@
   <ItemGroup>
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="objects.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="objects.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

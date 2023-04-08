@@ -18,6 +18,14 @@ int main()
 	#define PURPLE RGB{255, 0, 255}
 	#define CYAN RGB{0, 255, 255}
 
+	scene theScene{};
+
+	instance inst1{};
+	inst1.model = graphicalObject::cube;
+	inst1.position = Vector3d(1.25, 2, 7.5);
+
+	theScene.addInstance(inst1);
+
 	// verticies
 	std::vector<Vector3d> verticies
 	{
@@ -116,6 +124,8 @@ int main()
 		//SDL_RenderClear(pRenderer);
 
 		renderObject(verticies, triangles, pixelColourBuffer, width, height, camDistance);
+
+		renderScene(theScene, pixelColourBuffer, width, height, camDistance);
 
 		uint32_t* tempPixels = new uint32_t[height * width];
 		memset(tempPixels, 0, width * height * sizeof(uint32_t));

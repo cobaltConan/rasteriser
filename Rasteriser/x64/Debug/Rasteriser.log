@@ -1,2 +1,284 @@
-﻿  main.cpp
-  Rasteriser.vcxproj -> D:\C_Progamming\Rasteriser with Git\rasteriser\x64\Debug\Rasteriser.exe
+﻿  graphics.cpp
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.h(14,6): error C3646: 'colour': unknown override specifier
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.h(14,12): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(791,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(610,1): message : see reference to class template instantiation 'std::allocator<instance &>' being compiled
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(704,1): message : see reference to class template instantiation 'std::_Default_allocator_traits<_Alloc>' being compiled
+          with
+          [
+              _Alloc=std::allocator<instance &>
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(500,50): message : see reference to class template instantiation 'std::allocator_traits<_Alloc>' being compiled
+          with
+          [
+              _Alloc=std::allocator<instance &>
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(500,26): message : see reference to alias template instantiation 'std::_Rebind_alloc_t<_Alloc,_Ty>' being compiled
+          with
+          [
+              _Alloc=std::allocator<instance &>,
+              _Ty=instance &
+          ]
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.h(54,25): message : see reference to class template instantiation 'std::vector<instance &,std::allocator<instance &>>' being compiled
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(792,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(810,1): error C2528: 'address': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(814,1): error C2528: 'address': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(827,1): error C2528: '_Ptr': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(833,1): error C2528: 'allocate': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(847,1): error C2528: 'allocate': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(612,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(613,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(632,1): error C2528: '<template-parameter>': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(646,1): error C2528: '<template-parameter>': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(737,13): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(664,50): message : see reference to variable template 'const bool _Is_simple_alloc_v<std::allocator<instance &> >' being compiled
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(737,13): error C2528: '<template-parameter>': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(665,88): error C2528: '<template-parameter>': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(939,23): error C2535: 'void std::vector<instance &,std::allocator<instance &>>::push_back(_Ty)': member function already defined or declared
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(935,23): message : see declaration of 'std::vector<instance &,std::allocator<instance &>>::push_back'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(1069,27): error C2535: 'std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>> std::vector<_Ty,std::allocator<_Ty>>::insert(std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,_Ty)': member function already defined or declared
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(1065,27): message : see declaration of 'std::vector<instance &,std::allocator<instance &>>::insert'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(1849,1): error C2528: 'data': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(1853,1): error C2528: 'data': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(748,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(382,1): message : see reference to class template instantiation 'std::_Simple_types<_Ty>' being compiled
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(1369,1): message : see reference to class template instantiation 'std::_Vector_val<std::_Simple_types<_Ty>>' being compiled
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(2261,29): message : see reference to class template instantiation 'std::_Compressed_pair<std::allocator<instance &>,std::_Vector_val<std::_Simple_types<_Ty>>,true>' being compiled
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(749,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\graphics.cpp(308,12): error C2039: 'colour': is not a member of 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.h(9,8): message : see declaration of 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\graphics.cpp(303,2): error C2660: 'drawWireTriangle': function does not take 4 arguments
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\graphics.cpp(81,6): message : see declaration of 'drawWireTriangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\graphics.cpp(303,2): message : while trying to match the argument list '(_Ty, _Ty, _Ty, PixelColourBuffer)'
+          with
+          [
+              _Ty=Eigen::Vector2d
+          ]
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\graphics.cpp(337,2): error C2528: '<template-parameter>': you cannot create a pointer to a reference
+  main.cpp
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.h(14,6): error C3646: 'colour': unknown override specifier
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.h(14,12): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(791,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(610,1): message : see reference to class template instantiation 'std::allocator<instance &>' being compiled
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(704,1): message : see reference to class template instantiation 'std::_Default_allocator_traits<_Alloc>' being compiled
+          with
+          [
+              _Alloc=std::allocator<instance &>
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(500,50): message : see reference to class template instantiation 'std::allocator_traits<_Alloc>' being compiled
+          with
+          [
+              _Alloc=std::allocator<instance &>
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(500,26): message : see reference to alias template instantiation 'std::_Rebind_alloc_t<_Alloc,_Ty>' being compiled
+          with
+          [
+              _Alloc=std::allocator<instance &>,
+              _Ty=instance &
+          ]
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.h(54,25): message : see reference to class template instantiation 'std::vector<instance &,std::allocator<instance &>>' being compiled
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(792,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(810,1): error C2528: 'address': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(814,1): error C2528: 'address': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(827,1): error C2528: '_Ptr': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(833,1): error C2528: 'allocate': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(847,1): error C2528: 'allocate': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(612,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(613,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(632,1): error C2528: '<template-parameter>': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(646,1): error C2528: '<template-parameter>': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(737,13): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(664,50): message : see reference to variable template 'const bool _Is_simple_alloc_v<std::allocator<instance &> >' being compiled
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(737,13): error C2528: '<template-parameter>': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(665,88): error C2528: '<template-parameter>': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(939,23): error C2535: 'void std::vector<instance &,std::allocator<instance &>>::push_back(_Ty)': member function already defined or declared
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(935,23): message : see declaration of 'std::vector<instance &,std::allocator<instance &>>::push_back'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(1069,27): error C2535: 'std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>> std::vector<_Ty,std::allocator<_Ty>>::insert(std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,_Ty)': member function already defined or declared
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(1065,27): message : see declaration of 'std::vector<instance &,std::allocator<instance &>>::insert'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(1849,1): error C2528: 'data': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(1853,1): error C2528: 'data': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(748,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(382,1): message : see reference to class template instantiation 'std::_Simple_types<_Ty>' being compiled
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(1369,1): message : see reference to class template instantiation 'std::_Vector_val<std::_Simple_types<_Ty>>' being compiled
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(2261,29): message : see reference to class template instantiation 'std::_Compressed_pair<std::allocator<instance &>,std::_Vector_val<std::_Simple_types<_Ty>>,true>' being compiled
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(749,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(50,11): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(50,11): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(51,11): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(51,11): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(52,11): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(52,11): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(53,11): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(53,11): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(54,11): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(54,11): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(55,11): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(55,11): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(56,11): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(56,11): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(57,11): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(57,11): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(58,11): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(58,11): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(59,11): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(59,11): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(60,11): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(60,11): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(61,11): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\main.cpp(61,11): message : Invalid aggregate initialization
+  objects.cpp
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.h(14,6): error C3646: 'colour': unknown override specifier
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.h(14,12): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(791,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(610,1): message : see reference to class template instantiation 'std::allocator<instance &>' being compiled
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(704,1): message : see reference to class template instantiation 'std::_Default_allocator_traits<_Alloc>' being compiled
+          with
+          [
+              _Alloc=std::allocator<instance &>
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(500,50): message : see reference to class template instantiation 'std::allocator_traits<_Alloc>' being compiled
+          with
+          [
+              _Alloc=std::allocator<instance &>
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(500,26): message : see reference to alias template instantiation 'std::_Rebind_alloc_t<_Alloc,_Ty>' being compiled
+          with
+          [
+              _Alloc=std::allocator<instance &>,
+              _Ty=instance &
+          ]
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.h(54,25): message : see reference to class template instantiation 'std::vector<instance &,std::allocator<instance &>>' being compiled
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(792,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(810,1): error C2528: 'address': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(814,1): error C2528: 'address': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(827,1): error C2528: '_Ptr': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(833,1): error C2528: 'allocate': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(847,1): error C2528: 'allocate': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(612,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(613,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(632,1): error C2528: '<template-parameter>': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(646,1): error C2528: '<template-parameter>': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(737,13): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(664,50): message : see reference to variable template 'const bool _Is_simple_alloc_v<std::allocator<instance &> >' being compiled
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(737,13): error C2528: '<template-parameter>': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(665,88): error C2528: '<template-parameter>': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(939,23): error C2535: 'void std::vector<instance &,std::allocator<instance &>>::push_back(_Ty)': member function already defined or declared
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(935,23): message : see declaration of 'std::vector<instance &,std::allocator<instance &>>::push_back'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(1069,27): error C2535: 'std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>> std::vector<_Ty,std::allocator<_Ty>>::insert(std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,_Ty)': member function already defined or declared
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(1065,27): message : see declaration of 'std::vector<instance &,std::allocator<instance &>>::insert'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(1849,1): error C2528: 'data': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(1853,1): error C2528: 'data': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(748,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(382,1): message : see reference to class template instantiation 'std::_Simple_types<_Ty>' being compiled
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(1369,1): message : see reference to class template instantiation 'std::_Vector_val<std::_Simple_types<_Ty>>' being compiled
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(2261,29): message : see reference to class template instantiation 'std::_Compressed_pair<std::allocator<instance &>,std::_Vector_val<std::_Simple_types<_Ty>>,true>' being compiled
+          with
+          [
+              _Ty=instance &
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(749,1): error C2528: 'abstract declarator': you cannot create a pointer to a reference
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(14,33): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(14,33): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(14,11): error C2672: 'std::vector<Triangle,std::allocator<Triangle>>::emplace_back': no matching overloaded function found
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(925,33): message : could be 'decltype(auto) std::vector<Triangle,std::allocator<Triangle>>::emplace_back(_Valty &&...)'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(15,33): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(15,33): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(15,11): error C2672: 'std::vector<Triangle,std::allocator<Triangle>>::emplace_back': no matching overloaded function found
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(925,33): message : could be 'decltype(auto) std::vector<Triangle,std::allocator<Triangle>>::emplace_back(_Valty &&...)'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(16,33): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(16,33): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(16,11): error C2672: 'std::vector<Triangle,std::allocator<Triangle>>::emplace_back': no matching overloaded function found
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(925,33): message : could be 'decltype(auto) std::vector<Triangle,std::allocator<Triangle>>::emplace_back(_Valty &&...)'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(17,33): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(17,33): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(17,11): error C2672: 'std::vector<Triangle,std::allocator<Triangle>>::emplace_back': no matching overloaded function found
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(925,33): message : could be 'decltype(auto) std::vector<Triangle,std::allocator<Triangle>>::emplace_back(_Valty &&...)'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(18,33): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(18,33): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(18,11): error C2672: 'std::vector<Triangle,std::allocator<Triangle>>::emplace_back': no matching overloaded function found
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(925,33): message : could be 'decltype(auto) std::vector<Triangle,std::allocator<Triangle>>::emplace_back(_Valty &&...)'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(19,33): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(19,33): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(19,11): error C2672: 'std::vector<Triangle,std::allocator<Triangle>>::emplace_back': no matching overloaded function found
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(925,33): message : could be 'decltype(auto) std::vector<Triangle,std::allocator<Triangle>>::emplace_back(_Valty &&...)'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(20,33): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(20,33): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(20,11): error C2672: 'std::vector<Triangle,std::allocator<Triangle>>::emplace_back': no matching overloaded function found
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(925,33): message : could be 'decltype(auto) std::vector<Triangle,std::allocator<Triangle>>::emplace_back(_Valty &&...)'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(21,33): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(21,33): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(21,11): error C2672: 'std::vector<Triangle,std::allocator<Triangle>>::emplace_back': no matching overloaded function found
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(925,33): message : could be 'decltype(auto) std::vector<Triangle,std::allocator<Triangle>>::emplace_back(_Valty &&...)'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(22,33): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(22,33): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(22,11): error C2672: 'std::vector<Triangle,std::allocator<Triangle>>::emplace_back': no matching overloaded function found
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(925,33): message : could be 'decltype(auto) std::vector<Triangle,std::allocator<Triangle>>::emplace_back(_Valty &&...)'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(23,33): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(23,33): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(23,11): error C2672: 'std::vector<Triangle,std::allocator<Triangle>>::emplace_back': no matching overloaded function found
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(925,33): message : could be 'decltype(auto) std::vector<Triangle,std::allocator<Triangle>>::emplace_back(_Valty &&...)'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(24,33): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(24,33): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(24,11): error C2672: 'std::vector<Triangle,std::allocator<Triangle>>::emplace_back': no matching overloaded function found
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(925,33): message : could be 'decltype(auto) std::vector<Triangle,std::allocator<Triangle>>::emplace_back(_Valty &&...)'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(25,33): error C2440: '<function-style-cast>': cannot convert from 'initializer list' to 'Triangle'
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(25,33): message : Invalid aggregate initialization
+D:\C_Progamming\Rasteriser with Git\rasteriser\Rasteriser\objects.cpp(25,11): error C2672: 'std::vector<Triangle,std::allocator<Triangle>>::emplace_back': no matching overloaded function found
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\vector(925,33): message : could be 'decltype(auto) std::vector<Triangle,std::allocator<Triangle>>::emplace_back(_Valty &&...)'
+  Generating Code...
