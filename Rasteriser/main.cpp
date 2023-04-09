@@ -22,7 +22,7 @@ int main()
 
 	instance inst1{};
 	inst1.model = graphicalObject::cube;
-	inst1.position = Vector3d(1.25, 2, 7.5);
+	inst1.position = Vector3d(3, 2, 7.5);
 
 	theScene.addInstance(inst1);
 

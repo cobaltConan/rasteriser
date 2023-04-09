@@ -1,3 +1,4 @@
+#pragma once
 #include <objects.h>
 #include <vector>
 #include <array>
