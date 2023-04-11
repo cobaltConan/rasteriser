@@ -316,6 +316,36 @@ void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, int
 
 	auto model{ instance.returnModel() };
 
+	if (instance.rotation.x() != 0 or instance.rotation.y() != 0 or instance.rotation.z() != 0)
+	{
+			Eigen::Vector4d homogenousVertex{};
+			Eigen::Vector4d rotatedVertex{};
+			Eigen::Matrix4d rotationMatrix{};
+			double a{ instance.rotation.x() };
+			double b{ instance.rotation.y() };
+			double g{ instance.rotation.z() };
+			double sa = sin(a);
+			double sb = sin(b);
+			double sg = sin(g);
+			double ca = cos(a);
+			double cb = cos(b);
+			double cg = cos(g);
+
+			rotationMatrix << cb * cg, sa* sb* cg - ca * sg, ca* sb* cg + sa * sg, 0,
+				cb* sg, sa* sb* sg + ca * cg, ca* sb* sg - sa * cg, 0,
+				-sb, sa* cb, ca* cb, 0,
+				0, 0, 0, 1;
+
+		for (auto& vertex : model.verticies)
+		{
+			homogenousVertex <<  vertex.x(), vertex.y(), vertex.z(), 1;
+			rotatedVertex = rotationMatrix * homogenousVertex;
+			vertex.x() = rotatedVertex.x();
+			vertex.y() = rotatedVertex.y();
+			vertex.z() = rotatedVertex.z();
+		}
+	}
+
 	Vector3d movedVertex{};
 
 	for (auto& vertex : model.verticies)

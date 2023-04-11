@@ -1,9 +1,11 @@
 #pragma once
+
 #include <objects.h>
 #include <vector>
 #include <array>
 #include <cmath>
 #include <Eigen/Dense>
+#include <cmath>
 
 using Eigen::Vector2d;
 using Eigen::Vector3d;

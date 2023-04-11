@@ -11,6 +11,7 @@
 int main()
 {
 	// Testing area
+
 	#define RED RGB{255, 0, 0}
 	#define GREEN RGB{0, 255, 0}
 	#define BLUE RGB{0, 0, 255}
@@ -22,44 +23,18 @@ int main()
 
 	instance inst1{};
 	inst1.model = graphicalObject::cube;
-	inst1.position = Vector3d(3, 2, 7.5);
+	inst1.position = Vector3d(3, 1, 7.5);
+	inst1.rotation = Vector3d(90.0, 110.0, 90.0);
+
+	instance inst2{};
+	inst2.model = graphicalObject::cube;
+	inst2.position = Vector3d(-3, -2, 15);
+	inst2.rotation = Vector3d(0, 0, 0);
+
+	bool moveFlag{ true };
 
 	theScene.addInstance(inst1);
-
-	// verticies
-	std::vector<Vector3d> verticies
-	{
-		Vector3d{ 1,  1,  1},
-		Vector3d{-1,  1,  1},
-		Vector3d{-1, -1,  1},
-		Vector3d{ 1, -1,  1},
-		Vector3d{ 1,  1, -1},
-		Vector3d{-1,  1, -1},
-		Vector3d{-1, -1, -1},
-		Vector3d{ 1, -1, -1}
-	};
-
-	for (auto& element : verticies)
-	{
-		element.x() -= 3;
-		element.z() += 7;
-	}
-
-	std::vector<Triangle> triangles
-	{
-		Triangle{0, 1, 2, RED},
-		Triangle{0, 2, 3, RED},
-		Triangle{4, 0, 3, GREEN},
-		Triangle{4, 3, 7, GREEN},
-		Triangle{5, 4, 7, BLUE},
-		Triangle{5, 7, 6, BLUE},
-		Triangle{1, 5, 6, YELLOW},
-		Triangle{1, 6, 2, YELLOW},
-		Triangle{4, 5, 1, PURPLE},
-		Triangle{4, 1, 0, PURPLE},
-		Triangle{2, 6, 7, CYAN},
-		Triangle{2, 7, 3, CYAN},
-	};
+	theScene.addInstance(inst2);
 
 	// End of testing area
 	
@@ -123,7 +98,21 @@ int main()
 		//SDL_SetRenderDrawColor(pRenderer, 255, 255, 0, 255);
 		//SDL_RenderClear(pRenderer);
 
-		renderObject(verticies, triangles, pixelColourBuffer, width, height, camDistance);
+		theScene.instances.at(0).rotation.x() += 0.03;
+		theScene.instances.at(0).rotation.y() += 0.06;
+		theScene.instances.at(0).rotation.z() += 0.09;
+
+		theScene.instances.at(1).rotation.z() += 0.01;
+
+		if (theScene.instances.at(0).position.x() > 3)
+			moveFlag = true;
+		else if (theScene.instances.at(0).position.x() < -3)
+			moveFlag = false;
+
+		if (moveFlag)
+			theScene.instances.at(0).position.x() -= 0.1;
+		else
+			theScene.instances.at(0).position.x() += 0.1;
 
 		renderScene(theScene, pixelColourBuffer, width, height, camDistance);
 
