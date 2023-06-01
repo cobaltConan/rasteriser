@@ -1,4 +1,5 @@
-#include "objects.h"
+#include "objects.h" 
+#include <stdexcept>
 
 cube::cube()
 {
@@ -35,9 +36,13 @@ cube instance::returnModel() // use overloading to figure out a way to return di
 {
 	switch (this->model)
 	{
-		case graphicalObject::cube:
+		case graphicalObject::cube: {
 			cube theCube;
 			return theCube;
+        }
+        default:
+            throw std::invalid_argument("Tried to assign a null model ot the instance"); 
+            break;
 	}
 }
 

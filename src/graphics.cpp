@@ -316,25 +316,17 @@ void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, int
 
 	auto model{ instance.returnModel() };
 
+    // create setter functions for instance so that it applies them into an internally stored homogenous matrix
+    // multiply translation, rotation, and scale matricies
+    // refactor main.cpp
+
 	if (instance.rotation.x() != 0 or instance.rotation.y() != 0 or instance.rotation.z() != 0)
 	{
 			Eigen::Vector4d homogenousVertex{};
 			Eigen::Vector4d rotatedVertex{};
 			Eigen::Matrix4d rotationMatrix{};
-			double a{ instance.rotation.x() };
-			double b{ instance.rotation.y() };
-			double g{ instance.rotation.z() };
-			double sa = sin(a);
-			double sb = sin(b);
-			double sg = sin(g);
-			double ca = cos(a);
-			double cb = cos(b);
-			double cg = cos(g);
 
-			rotationMatrix << cb * cg, sa* sb* cg - ca * sg, ca* sb* cg + sa * sg, 0,
-				cb* sg, sa* sb* sg + ca * cg, ca* sb* sg - sa * cg, 0,
-				-sb, sa* cb, ca* cb, 0,
-				0, 0, 0, 1;
+            calcRotMatrix(rotationMatrix, instance);
 
 		for (auto& vertex : model.verticies)
 		{
@@ -367,4 +359,23 @@ void renderScene(scene scene, PixelColourBuffer& pixelColourBuffer, int16_t cWid
 	{
 		renderInstance(instance, pixelColourBuffer, cWidth, cHeight, camDistance);
 	}
+}
+
+
+void calcRotMatrix(Eigen::Matrix4d &hrm, const instance &instance)
+{
+        double a{ instance.rotation.x() };
+        double b{ instance.rotation.y() };
+        double g{ instance.rotation.z() };
+        double sa = sin(a);
+        double sb = sin(b);
+        double sg = sin(g);
+        double ca = cos(a);
+        double cb = cos(b);
+        double cg = cos(g);
+
+        hrm << cb * cg, sa* sb* cg - ca * sg, ca* sb* cg + sa * sg, 0,
+        cb* sg, sa* sb* sg + ca * cg, ca* sb* sg - sa * cg, 0,
+        -sb, sa* cb, ca* cb, 0,
+        0, 0, 0, 1;
 }
