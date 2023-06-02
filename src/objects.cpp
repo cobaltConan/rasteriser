@@ -1,4 +1,5 @@
 #include "objects.h" 
+#include "graphics.h"
 #include <stdexcept>
 
 cube::cube()
@@ -50,4 +51,43 @@ cube instance::returnModel() // use overloading to figure out a way to return di
 void scene::addInstance(const instance& inst)
 {
 	this->instances.emplace_back(inst);
+}
+
+instance::instance()
+{
+    hsm << 1, 0, 0, 0,
+           0, 1, 0, 0,
+           0, 0, 1, 0,
+           0, 0, 0, 1;
+
+    htm << 1, 0, 0, 0,
+           0, 1, 0, 0,
+           0, 0, 1, 0,
+           0, 0, 0, 1;
+
+    hrm << 1, 0, 0, 0,
+           0, 1, 0, 0,
+           0, 0, 1, 0,
+           0, 0, 0, 1;
+}
+
+void instance::setScale(const Vector3d& scaleVec)
+{
+    hsm << scaleVec.x(), 0, 0, 0,
+           0, scaleVec.y(), 0, 0,
+           0, 0, scaleVec.z(), 0,
+           0, 0, 0,            1;
+}
+
+void instance::setPosition(const Vector3d& posVec)
+{
+    htm << 1, 0, 0, posVec.x(),
+           0, 1, 0, posVec.y(),
+           0, 0, 1, posVec.z(),
+           0, 0, 0, 1;
+}
+
+void instance::setRotation(const Vector3d& rotVec)
+{
+    calcRotMatrix(hrm, rotVec);
 }

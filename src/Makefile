@@ -1,23 +1,21 @@
-CC=g++
-INCDIRS=-I. 
-OPT=-O0
-CFLAGS=-Wall -Wextra -lSDL2 -g $(INCDIRS) $(OPT) 
-S_Dir=src
-B_Dir=build
+#CC = g++
+LOADLIBES = -lSDL2
+CXXFLAGS = -Wall -O0 -g
 
-CFILES=main.cpp objects.cpp graphics.cpp
-OBJECTS=main.o objects.o graphics.o
 
-BINARY=bin
+SRC1 = objects.cpp graphics.cpp
 
-all: $(BINARY)
+SRC2 = main.cpp
 
-$(BINARY): $(OBJECTS)
-	$(CC) -o $@ $^ -lSDL2
+SRC  = $(SRC1) $(SRC2)
 
-# regular expression where % is a wildcard
-%.o:/%.c
-	$(CC) $(CFLAGS) -c -o $@ $^ 
+OBJS = $(SRC1:.cpp=.o)
 
+AUX = $(SRC1:.c=.h)
+
+main: $(OBJS) $(SRC2)
+#   Built by implicit rules
+
+.PHONY: clean
 clean:
-	rm -rf $(BINARY) $(OBJECTS)
+	rm -f *.o main

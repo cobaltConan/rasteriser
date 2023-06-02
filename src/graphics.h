@@ -6,6 +6,7 @@
 #include <cmath>
 #include "../../libs/eigen/Eigen/Dense"
 #include <cmath>
+#include <iostream>
 
 using Eigen::Vector2d;
 using Eigen::Vector3d;
@@ -29,4 +30,4 @@ void renderObject(std::vector<Vector3d> verticies, std::vector<Triangle> triangl
 void renderTriangle(Triangle triangle, std::vector<Vector2d> projectedVerticies, PixelColourBuffer& pixelColourBuffer);
 void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, int16_t cWidth, int16_t cHeight, double camDistance);
 void renderScene(scene scene, PixelColourBuffer& pixelColourBuffer, int16_t cWidth, int16_t cHeight, double camDistance);
-void calcRotMatrix(Eigen::Matrix4d& hrm, const instance& instance); 
+void calcRotMatrix(Eigen::Matrix4d& hrm, const Vector3d& rotVec);

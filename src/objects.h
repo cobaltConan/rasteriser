@@ -45,9 +45,14 @@ class instance
 {
 public:
 	graphicalObject model;
-	Vector3d position;
-	Vector3d rotation;
-
+    Eigen::Matrix4d htm; // homogenous transformation matrix
+    Eigen::Matrix4d hrm; // homogenous rotation matrix
+    Eigen::Matrix4d hsm; // homogenous scale matrix
+    
+    instance();
+    void setPosition(const Vector3d& posVec);
+    void setRotation(const Vector3d& rotVec);
+    void setScale(const Vector3d& scaleVec);
 	cube returnModel();
 };
 

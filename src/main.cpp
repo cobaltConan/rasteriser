@@ -22,19 +22,13 @@ int main()
 
 	instance inst1{};
 	inst1.model = graphicalObject::cube;
-	inst1.position = Vector3d(3, 1, 7.5);
-	inst1.rotation = Vector3d(90.0, 110.0, 90.0);
 
-	instance inst2{};
-	inst2.model = graphicalObject::cube;
-	inst2.position = Vector3d(-3, -2, 15);
-	inst2.rotation = Vector3d(0, 0, 0);
+    double rot{};
 
-	bool moveFlag{ true };
+    inst1.setScale(Vector3d {0.5, 0.5, 0.5});
+    inst1.setPosition(Vector3d {0, 0, 3});
 
 	theScene.addInstance(inst1);
-	theScene.addInstance(inst2);
-
 	// End of testing area
 	
 	double camDistance = 1;
@@ -96,22 +90,8 @@ int main()
 		// set background colour
 		//SDL_SetRenderDrawColor(pRenderer, 255, 255, 0, 255);
 		//SDL_RenderClear(pRenderer);
-
-		theScene.instances.at(0).rotation.x() += 0.03;
-		theScene.instances.at(0).rotation.y() += 0.06;
-		theScene.instances.at(0).rotation.z() += 0.09;
-
-		theScene.instances.at(1).rotation.z() += 0.01;
-
-		if (theScene.instances.at(0).position.x() > 3)
-			moveFlag = true;
-		else if (theScene.instances.at(0).position.x() < -3)
-			moveFlag = false;
-
-		if (moveFlag)
-			theScene.instances.at(0).position.x() -= 0.1;
-		else
-			theScene.instances.at(0).position.x() += 0.1;
+        theScene.instances.at(0).setRotation(Vector3d {rot, rot, 0});
+        rot += 0.05;
 
 		renderScene(theScene, pixelColourBuffer, width, height, camDistance);
 
@@ -131,7 +111,7 @@ int main()
 		
 		delete[] tempPixels;
 		
-		for (int i{}; i < pixelColourBuffer.r.size(); ++i)
+		for (size_t i{}; i < pixelColourBuffer.r.size(); ++i) // warning if not size_t due to compariosn with .size() return type
 		{
 			std::fill(pixelColourBuffer.r.at(i).begin(), pixelColourBuffer.r.at(i).end(), 0);
 			std::fill(pixelColourBuffer.g.at(i).begin(), pixelColourBuffer.g.at(i).end(), 0);

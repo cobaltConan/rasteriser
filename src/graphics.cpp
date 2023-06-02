@@ -313,40 +313,30 @@ void renderTriangle(Triangle triangle, std::vector<Vector2d> projectedVerticies,
 void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, int16_t cWidth, int16_t cHeight, double camDistance)
 {
 	std::vector<Vector2d> projectedVerticies;
-
+    Eigen::Matrix4d hModelMatrix;
 	auto model{ instance.returnModel() };
+    Eigen::Vector4d homogenousVertex{};
+    Eigen::Vector4d transformedVertex{};
 
-    // create setter functions for instance so that it applies them into an internally stored homogenous matrix
-    // multiply translation, rotation, and scale matricies
+    // create camera object
+    // implement inverse rotation and translation matricies
+    // create struct for scene settings
     // refactor main.cpp
+    // remove project vertex and viewport to canvas when switched over
 
-	if (instance.rotation.x() != 0 or instance.rotation.y() != 0 or instance.rotation.z() != 0)
-	{
-			Eigen::Vector4d homogenousVertex{};
-			Eigen::Vector4d rotatedVertex{};
-			Eigen::Matrix4d rotationMatrix{};
+    hModelMatrix = instance.htm * instance.hrm * instance.hsm; // combining all transformation matricies into one
+    
+    for (auto& vertex : model.verticies)
+    {
+        homogenousVertex <<  vertex.x(), vertex.y(), vertex.z(), 1;
+        transformedVertex = hModelMatrix * homogenousVertex;
+        vertex.x() = transformedVertex.x();
+        vertex.y() = transformedVertex.y();
+        vertex.z() = transformedVertex.z();
+		projectedVerticies.emplace_back(projectVertex(vertex, cWidth, cHeight, camDistance));
+    }
 
-            calcRotMatrix(rotationMatrix, instance);
-
-		for (auto& vertex : model.verticies)
-		{
-			homogenousVertex <<  vertex.x(), vertex.y(), vertex.z(), 1;
-			rotatedVertex = rotationMatrix * homogenousVertex;
-			vertex.x() = rotatedVertex.x();
-			vertex.y() = rotatedVertex.y();
-			vertex.z() = rotatedVertex.z();
-		}
-	}
-
-	Vector3d movedVertex{};
-
-	for (auto& vertex : model.verticies)
-	{
-		movedVertex = vertex + instance.position;
-		projectedVerticies.emplace_back(projectVertex(movedVertex, cWidth, cHeight, camDistance));
-	}
-
-	for (auto& triangle : model.triangles)
+	for (const auto& triangle : model.triangles)
 	{
 		renderTriangle(triangle, projectedVerticies, pixelColourBuffer);
 	}
@@ -355,18 +345,18 @@ void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, int
 
 void renderScene(scene scene, PixelColourBuffer& pixelColourBuffer, int16_t cWidth, int16_t cHeight, double camDistance)
 {
-	for (auto& instance : scene.instances)
+	for (const auto& instance : scene.instances)
 	{
 		renderInstance(instance, pixelColourBuffer, cWidth, cHeight, camDistance);
 	}
 }
 
 
-void calcRotMatrix(Eigen::Matrix4d &hrm, const instance &instance)
+void calcRotMatrix(Eigen::Matrix4d &hrm, const Vector3d& rotVec)
 {
-        double a{ instance.rotation.x() };
-        double b{ instance.rotation.y() };
-        double g{ instance.rotation.z() };
+        double a{ rotVec.x() };
+        double b{ rotVec.y() };
+        double g{ rotVec.z() };
         double sa = sin(a);
         double sb = sin(b);
         double sg = sin(g);
