@@ -1,4 +1,5 @@
 #include "graphics.h"
+#include "objects.h"
 
 std::vector<double> interpolate(int32_t i0, double d0, int32_t i1, double d1)
 {
@@ -46,9 +47,12 @@ void drawLine(Vector2d p0, Vector2d p1, PixelColourBuffer &pixelColourBuffer, RG
 		for (int x{ x0 }; x <= x1; ++x)
 		{
 			int32_t y{ static_cast<int32_t>(std::round(ys.at(x - x0))) }; // converts y value in ys vec to int
-			pixelColourBuffer.r.at(y).at(x) = colours.r;
-			pixelColourBuffer.g.at(y).at(x) = colours.g;
-			pixelColourBuffer.b.at(y).at(x) = colours.b;
+
+            if (0 <= y and y < 800 and 0 <= x and x < 1600) {
+                pixelColourBuffer.r.at(y).at(x) = colours.r;
+                pixelColourBuffer.g.at(y).at(x) = colours.g;
+                pixelColourBuffer.b.at(y).at(x) = colours.b;
+            }
 		}
 
 	}
@@ -70,9 +74,12 @@ void drawLine(Vector2d p0, Vector2d p1, PixelColourBuffer &pixelColourBuffer, RG
 		for (int y{ y0 }; y <= y1; ++y)
 		{
 			int32_t x{ static_cast<int32_t>(std::round(xs.at(y - y0))) }; // converts y value in ys vec to int
-			pixelColourBuffer.r.at(y).at(x) = colours.r;
-			pixelColourBuffer.g.at(y).at(x) = colours.g;
-			pixelColourBuffer.b.at(y).at(x) = colours.b;
+                                                                          
+            if (0 <= y and y < 800 and 0 <= x and x < 1600) {
+                pixelColourBuffer.r.at(y).at(x) = colours.r;
+                pixelColourBuffer.g.at(y).at(x) = colours.g;
+                pixelColourBuffer.b.at(y).at(x) = colours.b;
+            }
 		}
 	}
 }
@@ -252,43 +259,39 @@ void drawShadedTriangle(Vector2d p0, Vector2d p1, Vector2d p2, PixelColourBuffer
 }
 
 
-Vector2d viewportToCanvas(Vector2d point, int16_t cWidth, int16_t cHeight)
+Vector2d viewportToCanvas(Vector2d point, const sceneInfo& sceneInfo)
 {
 	Vector2d returnPoint{};
-	double vWidth{ 2 }; // width of the viewport
-	double vHeight{ 1 }; // height of the viewport
-	double cWidthD{}, cHeightD{};
+	double cWidthD{ static_cast<double>(sceneInfo.screenWidth) };
+    double cHeightD{ static_cast<double>(sceneInfo.screenHeight) };
 
-	cWidthD = static_cast<double>(cWidth);
-	cHeightD = static_cast<double>(cHeight);
-	returnPoint.x() = (point.x() * (cWidthD / vWidth)) + cWidthD / 2; // shifting by half distance due to difference in coordinate systems
-	returnPoint.y() = (point.y() * (cHeightD / vHeight)) + cHeightD / 2; // shifting by half distance due to difference in coordinate systems
-
+	returnPoint.x() = (point.x() * (cWidthD / sceneInfo.viewportWidth)) + cWidthD / 2; // shifting by half distance due to difference in coordinate systems
+	returnPoint.y() = (point.y() * (cHeightD / sceneInfo.viewportHeight)) + cHeightD / 2; // shifting by half distance due to difference in coordinate systems
 	
 	return returnPoint;
 }
 
 
-Vector2d projectVertex(Vector3d vert, int16_t cWidth, int16_t cHeight, double camDistance)
+Vector2d projectVertex(Vector3d vert, const sceneInfo& sceneInfo)
 {
 	Vector2d returnVert{};
 
-	returnVert.x() = (vert.x() * camDistance) / vert.z();
-	returnVert.y() = (vert.y() * camDistance) / vert.z();
+	returnVert.x() = (vert.x() * sceneInfo.cameraDistance) / vert.z();
+	returnVert.y() = (vert.y() * sceneInfo.cameraDistance) / vert.z();
 
-	returnVert = viewportToCanvas(returnVert, cWidth, cHeight);
+	returnVert = viewportToCanvas(returnVert, sceneInfo);
 
 	return returnVert;
 }
 
 
-void renderObject(std::vector<Vector3d> verticies, std::vector<Triangle> triangles, PixelColourBuffer& pixelColourBuffer, int16_t cWidth, int16_t cHeight, double camDistance)
+void renderObject(std::vector<Vector3d> verticies, std::vector<Triangle> triangles, PixelColourBuffer& pixelColourBuffer, const sceneInfo& sceneInfo)
 {
 	std::vector<Vector2d> projectVerticies;
 
 	for (auto& vertex : verticies)
 	{
-		projectVerticies.emplace_back(projectVertex(vertex, cWidth, cHeight, camDistance));
+		projectVerticies.emplace_back(projectVertex(vertex, sceneInfo));
 	}
 
 	for (auto& triangle : triangles)
@@ -310,7 +313,7 @@ void renderTriangle(Triangle triangle, std::vector<Vector2d> projectedVerticies,
 }
 
 
-void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, int16_t cWidth, int16_t cHeight, double camDistance)
+void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, const sceneInfo& sceneInfo, const cameraInfo& cameraInfo)
 {
 	std::vector<Vector2d> projectedVerticies;
     Eigen::Matrix4d hModelMatrix;
@@ -318,14 +321,16 @@ void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, int
     Eigen::Vector4d homogenousVertex{};
     Eigen::Vector4d transformedVertex{};
 
-    // create camera object
+    // create camera object -> include this in main
     // implement inverse rotation and translation matricies
     // create struct for scene settings
     // refactor main.cpp
     // remove project vertex and viewport to canvas when switched over
 
     hModelMatrix = instance.htm * instance.hrm * instance.hsm; // combining all transformation matricies into one
+    hModelMatrix = cameraInfo.ihrm * cameraInfo.ihtm * hModelMatrix;
     
+   
     for (auto& vertex : model.verticies)
     {
         homogenousVertex <<  vertex.x(), vertex.y(), vertex.z(), 1;
@@ -333,8 +338,28 @@ void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, int
         vertex.x() = transformedVertex.x();
         vertex.y() = transformedVertex.y();
         vertex.z() = transformedVertex.z();
-		projectedVerticies.emplace_back(projectVertex(vertex, cWidth, cHeight, camDistance));
+		projectedVerticies.emplace_back(projectVertex(vertex, sceneInfo));
     }
+    
+    /*
+
+    Eigen::Matrix<double, 3, 4> projectionMatrix{};
+    
+    calcProjectionMatrix(sceneInfo, projectionMatrix);
+    projectionMatrix = projectionMatrix * hModelMatrix;
+
+
+
+    for (auto& vertex : model.verticies)
+    {
+        homogenousVertex << vertex, 1;
+        std::cout << homogenousVertex << '\n';
+        projectedVertex = projectionMatrix * homogenousVertex;
+        projectedVerticies.emplace_back(Vector2d {projectedVertex.x() / projectedVertex.z(), projectedVertex.y() / projectedVertex.z()});
+    }
+
+    */
+
 
 	for (const auto& triangle : model.triangles)
 	{
@@ -343,11 +368,11 @@ void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, int
 }
 
 
-void renderScene(scene scene, PixelColourBuffer& pixelColourBuffer, int16_t cWidth, int16_t cHeight, double camDistance)
+void renderScene(scene scene, PixelColourBuffer& pixelColourBuffer, const sceneInfo& sceneInfo, const cameraInfo& cameraInfo)
 {
 	for (const auto& instance : scene.instances)
 	{
-		renderInstance(instance, pixelColourBuffer, cWidth, cHeight, camDistance);
+		renderInstance(instance, pixelColourBuffer, sceneInfo, cameraInfo);
 	}
 }
 
@@ -368,4 +393,31 @@ void calcRotMatrix(Eigen::Matrix4d &hrm, const Vector3d& rotVec)
         cb* sg, sa* sb* sg + ca * cg, ca* sb* sg - sa * cg, 0,
         -sb, sa* cb, ca* cb, 0,
         0, 0, 0, 1;
+}
+
+
+void calcInverseRotMatrix(Eigen::Matrix4d &hrm, const Vector3d &rotVec)
+{
+        double a{ rotVec.x() };
+        double b{ rotVec.y() };
+        double g{ rotVec.z() };
+        double sa = sin(a);
+        double sb = sin(b);
+        double sg = sin(g);
+        double ca = cos(a);
+        double cb = cos(b);
+        double cg = cos(g);
+
+        hrm << cb * cg, cb * sg, -sb, 0,
+        sa * sb * cg - ca * sg, sa * sb * sg + ca * cg, sa * cb , 0,
+        ca * sb * cg + sa * sg, ca * sb * sg - sa * cg, ca * cb, 0,
+        0, 0, 0, 1;
+}
+
+
+void calcProjectionMatrix(const sceneInfo& sceneInfo, Eigen::Matrix<double, 3, 4> projectionMatrix)
+{
+    projectionMatrix << sceneInfo.cameraDistance * sceneInfo.screenWidth / sceneInfo.viewportWidth, 0, 0, 0,
+                     0, sceneInfo.cameraDistance * sceneInfo.screenHeight / sceneInfo.viewportHeight, 0, 0,
+                     0, 0, 1, 0;
 }

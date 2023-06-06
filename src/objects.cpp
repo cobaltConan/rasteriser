@@ -53,6 +53,7 @@ void scene::addInstance(const instance& inst)
 	this->instances.emplace_back(inst);
 }
 
+
 instance::instance()
 {
     hsm << 1, 0, 0, 0,
@@ -71,6 +72,7 @@ instance::instance()
            0, 0, 0, 1;
 }
 
+
 void instance::setScale(const Vector3d& scaleVec)
 {
     hsm << scaleVec.x(), 0, 0, 0,
@@ -78,6 +80,7 @@ void instance::setScale(const Vector3d& scaleVec)
            0, 0, scaleVec.z(), 0,
            0, 0, 0,            1;
 }
+
 
 void instance::setPosition(const Vector3d& posVec)
 {
@@ -87,7 +90,37 @@ void instance::setPosition(const Vector3d& posVec)
            0, 0, 0, 1;
 }
 
+
 void instance::setRotation(const Vector3d& rotVec)
 {
     calcRotMatrix(hrm, rotVec);
+}
+
+
+cameraInfo::cameraInfo()
+{
+    ihtm << 1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1;
+
+    ihrm << 1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1;
+};
+
+
+void cameraInfo::setPosition(const Vector3d& posVec)
+{
+    ihtm << 1, 0, 0, -posVec.x(),
+            0, 1, 0, -posVec.y(),
+            0, 0, 1, -posVec.z(),
+            0, 0, 0, 1;
+}
+
+
+void cameraInfo::setRotation(const Vector3d& rotVec)
+{
+    calcInverseRotMatrix(ihrm, rotVec);
 }

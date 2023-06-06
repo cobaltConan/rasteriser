@@ -1,6 +1,9 @@
 #include "graphics.h"
 #include "SDL2/SDL.h"
 #include "../../libs/eigen/Eigen/Dense"
+#include "objects.h"
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_mouse.h>
 #include <iostream>
 #include <vector>
 #include <array>
@@ -25,19 +28,31 @@ int main()
 
     double rot{};
 
-    inst1.setScale(Vector3d {0.5, 0.5, 0.5});
-    inst1.setPosition(Vector3d {0, 0, 3});
+    inst1.setPosition(Vector3d {0, 0, 5});
 
 	theScene.addInstance(inst1);
 	// End of testing area
 	
-	double camDistance = 1;
-	constexpr int16_t width{ 1600 };
-	constexpr int16_t height{ 800 };
+	double camDistance{1.0};
+	int64_t width{1600};
+	int64_t height{800};
+    double vHeight{1.0};
+    double vWidth{2.0};
 	PixelColourBuffer pixelColourBuffer{}; // r g b values for all the pixels on the screen
 	uint32_t pixelColour{}; // for putting the channels into
 	bool isRunning = true;
 	SDL_Event event{};
+    sceneInfo sceneInfo{};
+    cameraInfo cameraInfo{};
+    Vector3d cameraPos{};
+    Vector3d cameraRot{};
+    double cameraSpeed{0.5};
+
+    sceneInfo.screenHeight = height;
+    sceneInfo.screenWidth = width;
+    sceneInfo.cameraDistance = camDistance;
+    sceneInfo.viewportHeight = vHeight;
+    sceneInfo.viewportWidth = vWidth;
 
 	// setting the colour channel sizes to the screen size
 	pixelColourBuffer.r.resize(height, std::vector<uint8_t>(width, 0));
@@ -46,7 +61,7 @@ int main()
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
-		return false;
+		return 0;
 	}
 
 	auto *pWindow = SDL_CreateWindow("El Rasteriser", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
@@ -77,6 +92,8 @@ int main()
 	auto *pTexture = SDL_CreateTextureFromSurface(pRenderer, tempSurface);
 	SDL_FreeSurface(tempSurface);
 
+    SDL_SetRelativeMouseMode(SDL_TRUE);
+
 	while (isRunning)
 	{
 		while (SDL_PollEvent(&event) != 0)
@@ -85,15 +102,50 @@ int main()
 			{
 				isRunning = false;
 			}
+
+            if (event.type == SDL_KEYDOWN) 
+            {
+                switch(event.key.keysym.sym)
+                {
+                    case SDLK_w:
+                        cameraPos.z() += cameraSpeed;
+                        break;
+
+                    case SDLK_s:
+                        cameraPos.z() -= cameraSpeed;
+                        break;
+
+                    case SDLK_d:
+                        cameraPos.x() += cameraSpeed;
+                        break;
+
+                    case SDLK_a:
+                        cameraPos.x() -= cameraSpeed;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            if (event.type == SDL_MOUSEMOTION)
+            {
+                cameraRot.y() += static_cast<double>(event.motion.xrel) / 75;
+                cameraRot.x() -= static_cast<double>(event.motion.yrel) / 75;
+            }
 		}
 
 		// set background colour
 		//SDL_SetRenderDrawColor(pRenderer, 255, 255, 0, 255);
 		//SDL_RenderClear(pRenderer);
+        
+        cameraInfo.setPosition(cameraPos);
+        cameraInfo.setRotation(cameraRot);
+
         theScene.instances.at(0).setRotation(Vector3d {rot, rot, 0});
         rot += 0.05;
 
-		renderScene(theScene, pixelColourBuffer, width, height, camDistance);
+		renderScene(theScene, pixelColourBuffer, sceneInfo, cameraInfo);
 
 		uint32_t* tempPixels = new uint32_t[height * width];
 		memset(tempPixels, 0, width * height * sizeof(uint32_t));

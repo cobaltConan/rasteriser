@@ -23,6 +23,14 @@ struct Triangle
 	RGB colour;
 };
 
+struct sceneInfo
+{
+    int64_t screenWidth;
+    int64_t screenHeight;
+    double cameraDistance;
+    double viewportWidth;
+    double viewportHeight;
+};
 
 #define RED RGB{255, 0, 0}
 #define GREEN RGB{0, 255, 0}
@@ -62,4 +70,16 @@ class scene
 public:
 	std::vector<instance> instances;
 	void addInstance(const instance& inst);
+};
+
+
+class cameraInfo
+{
+public:
+    Eigen::Matrix4d ihtm; // inverse homogenous transformation matrix;
+    Eigen::Matrix4d ihrm; // inverse homogenous rotation matrix;
+
+    cameraInfo();
+    void setPosition(const Vector3d& posVec);
+    void setRotation(const Vector3d& rotVec);
 };
