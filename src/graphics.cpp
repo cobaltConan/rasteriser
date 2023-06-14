@@ -259,32 +259,6 @@ void drawShadedTriangle(Vector2d p0, Vector2d p1, Vector2d p2, PixelColourBuffer
 }
 
 
-Vector2d viewportToCanvas(Vector2d point, const sceneInfo& sceneInfo)
-{
-	Vector2d returnPoint{};
-	double cWidthD{ static_cast<double>(sceneInfo.screenWidth) };
-    double cHeightD{ static_cast<double>(sceneInfo.screenHeight) };
-
-	returnPoint.x() = (point.x() * (cWidthD / sceneInfo.viewportWidth)) + cWidthD / 2; // shifting by half distance due to difference in coordinate systems
-	returnPoint.y() = (point.y() * (cHeightD / sceneInfo.viewportHeight)) + cHeightD / 2; // shifting by half distance due to difference in coordinate systems
-	
-	return returnPoint;
-}
-
-
-Vector2d projectVertex(Vector3d vert, const sceneInfo& sceneInfo)
-{
-	Vector2d returnVert{};
-
-	returnVert.x() = (vert.x() * sceneInfo.cameraDistance) / vert.z();
-	returnVert.y() = (vert.y() * sceneInfo.cameraDistance) / vert.z();
-
-	returnVert = viewportToCanvas(returnVert, sceneInfo);
-
-	return returnVert;
-}
-
-
 void renderObject(std::vector<Vector3d> verticies, std::vector<Triangle> triangles, PixelColourBuffer& pixelColourBuffer, const sceneInfo& sceneInfo)
 {
 	std::vector<Vector2d> projectVerticies;
@@ -320,28 +294,15 @@ void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, con
 	auto model{ instance.returnModel() };
     Eigen::Vector4d homogenousVertex{};
     Eigen::Vector4d transformedVertex{};
+    Eigen::Vector3d projectedVertex{};
 
-    // create camera object -> include this in main
     // implement inverse rotation and translation matricies
     // create struct for scene settings
     // refactor main.cpp
     // remove project vertex and viewport to canvas when switched over
 
     hModelMatrix = instance.htm * instance.hrm * instance.hsm; // combining all transformation matricies into one
-    hModelMatrix = cameraInfo.ihrm * cameraInfo.ihtm * hModelMatrix;
-    
-   
-    for (auto& vertex : model.verticies)
-    {
-        homogenousVertex <<  vertex.x(), vertex.y(), vertex.z(), 1;
-        transformedVertex = hModelMatrix * homogenousVertex;
-        vertex.x() = transformedVertex.x();
-        vertex.y() = transformedVertex.y();
-        vertex.z() = transformedVertex.z();
-		projectedVerticies.emplace_back(projectVertex(vertex, sceneInfo));
-    }
-    
-    /*
+    hModelMatrix = cameraInfo.ihrm * cameraInfo.ihtm * hModelMatrix; // applying camera transforms
 
     Eigen::Matrix<double, 3, 4> projectionMatrix{};
     
@@ -353,12 +314,11 @@ void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, con
     for (auto& vertex : model.verticies)
     {
         homogenousVertex << vertex, 1;
-        std::cout << homogenousVertex << '\n';
         projectedVertex = projectionMatrix * homogenousVertex;
-        projectedVerticies.emplace_back(Vector2d {projectedVertex.x() / projectedVertex.z(), projectedVertex.y() / projectedVertex.z()});
+        projectedVerticies.emplace_back(Vector2d {(projectedVertex.x() / projectedVertex.z()) + static_cast<double>(sceneInfo.screenWidth) / 2, (projectedVertex.y() / projectedVertex.z()) + static_cast<double>(sceneInfo.screenHeight) / 2});
     }
 
-    */
+   
 
 
 	for (const auto& triangle : model.triangles)
@@ -415,9 +375,9 @@ void calcInverseRotMatrix(Eigen::Matrix4d &hrm, const Vector3d &rotVec)
 }
 
 
-void calcProjectionMatrix(const sceneInfo& sceneInfo, Eigen::Matrix<double, 3, 4> projectionMatrix)
+void calcProjectionMatrix(const sceneInfo& sceneInfo, Eigen::Matrix<double, 3, 4>& projectionMatrix)
 {
-    projectionMatrix << sceneInfo.cameraDistance * sceneInfo.screenWidth / sceneInfo.viewportWidth, 0, 0, 0,
-                     0, sceneInfo.cameraDistance * sceneInfo.screenHeight / sceneInfo.viewportHeight, 0, 0,
+    projectionMatrix << sceneInfo.cameraDistance * static_cast<double>(sceneInfo.screenWidth) / sceneInfo.viewportWidth, 0, 0, 0,
+                     0, sceneInfo.cameraDistance * static_cast<double>(sceneInfo.screenHeight) / sceneInfo.viewportHeight, 0, 0,
                      0, 0, 1, 0;
 }

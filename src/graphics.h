@@ -32,4 +32,4 @@ void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, con
 void renderScene(scene scene, PixelColourBuffer& pixelColourBuffer, const sceneInfo& sceneInfo, const cameraInfo& cameraInfo);
 void calcRotMatrix(Eigen::Matrix4d& hrm, const Vector3d& rotVec);
 void calcInverseRotMatrix(Eigen::Matrix4d& hrm, const Vector3d& rotVec);
-void calcProjectionMatrix(const sceneInfo& sceneInfo, Eigen::Matrix<double, 3, 4> projectionMatrix);
+void calcProjectionMatrix(const sceneInfo& sceneInfo, Eigen::Matrix<double, 3, 4>& projectionMatrix);
