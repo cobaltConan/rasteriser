@@ -165,7 +165,6 @@ void drawFilledTriangle(Vector2d p0, Vector2d p1, Vector2d p2, PixelColourBuffer
 void drawShadedTriangle(Vector2d p0, Vector2d p1, Vector2d p2, PixelColourBuffer& pixelColourBuffer, RGB colours, std::array<double, 3> h)
 {	
 	Vector2d temp{};
-
 	// sorting points so that y0 <= y1 <= y2
 	if (p1.y() < p0.y())
 	{
@@ -264,9 +263,9 @@ void renderObject(std::vector<Vector3d> verticies, std::vector<Triangle> triangl
 	std::vector<Vector2d> projectVerticies;
 
 	for (auto& vertex : verticies)
-	{
-		projectVerticies.emplace_back(projectVertex(vertex, sceneInfo));
-	}
+//	{
+//		projectVerticies.emplace_back(projectVertex(vertex, sceneInfo));
+//	}
 
 	for (auto& triangle : triangles)
 	{
@@ -290,36 +289,35 @@ void renderTriangle(Triangle triangle, std::vector<Vector2d> projectedVerticies,
 void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, const sceneInfo& sceneInfo, const cameraInfo& cameraInfo)
 {
 	std::vector<Vector2d> projectedVerticies;
-    Eigen::Matrix4d hModelMatrix;
+    Eigen::Matrix4d homSceneTransform;
 	auto model{ instance.returnModel() };
-    Eigen::Vector4d homogenousVertex{};
     Eigen::Vector4d transformedVertex{};
     Eigen::Vector3d projectedVertex{};
+    std::vector<Vector3d> verticiesForBounding{};
+    std::vector<Eigen::Vector4d> tranVerticies{};
 
-    // implement inverse rotation and translation matricies
-    // create struct for scene settings
-    // refactor main.cpp
-    // remove project vertex and viewport to canvas when switched over
+    homSceneTransform = instance.htm * instance.hrm * instance.hsm; // combining all transformation matricies into one
+    homSceneTransform = cameraInfo.ihrm * cameraInfo.ihtm * homSceneTransform; // applying camera transforms
 
-    hModelMatrix = instance.htm * instance.hrm * instance.hsm; // combining all transformation matricies into one
-    hModelMatrix = cameraInfo.ihrm * cameraInfo.ihtm * hModelMatrix; // applying camera transforms
-
-    Eigen::Matrix<double, 3, 4> projectionMatrix{};
-    
-    calcProjectionMatrix(sceneInfo, projectionMatrix);
-    projectionMatrix = projectionMatrix * hModelMatrix;
-
-
-
-    for (auto& vertex : model.verticies)
+    for (const auto& vertex : model.verticies)
     {
+        Eigen::Vector4d homogenousVertex{};
+        Eigen::Vector4d vertexMultResult{};
         homogenousVertex << vertex, 1;
-        projectedVertex = projectionMatrix * homogenousVertex;
+        vertexMultResult = homSceneTransform * homogenousVertex;
+        tranVerticies.emplace_back(vertexMultResult);
+        verticiesForBounding.emplace_back(Vector3d{vertexMultResult.x(), vertexMultResult.y(), vertexMultResult.z()});
+    }
+    
+    boundingSphere modelBSphere{calculateBoundingSphere(verticiesForBounding)};
+    Eigen::Matrix<double, 3, 4> projectionMatrix{};
+    calcProjectionMatrix(sceneInfo, projectionMatrix);
+
+    for (const auto& vertex : tranVerticies)
+    {
+        projectedVertex = projectionMatrix * vertex;
         projectedVerticies.emplace_back(Vector2d {(projectedVertex.x() / projectedVertex.z()) + static_cast<double>(sceneInfo.screenWidth) / 2, (projectedVertex.y() / projectedVertex.z()) + static_cast<double>(sceneInfo.screenHeight) / 2});
     }
-
-   
-
 
 	for (const auto& triangle : model.triangles)
 	{
@@ -334,44 +332,6 @@ void renderScene(scene scene, PixelColourBuffer& pixelColourBuffer, const sceneI
 	{
 		renderInstance(instance, pixelColourBuffer, sceneInfo, cameraInfo);
 	}
-}
-
-
-void calcRotMatrix(Eigen::Matrix4d &hrm, const Vector3d& rotVec)
-{
-        double a{ rotVec.x() };
-        double b{ rotVec.y() };
-        double g{ rotVec.z() };
-        double sa = sin(a);
-        double sb = sin(b);
-        double sg = sin(g);
-        double ca = cos(a);
-        double cb = cos(b);
-        double cg = cos(g);
-
-        hrm << cb * cg, sa* sb* cg - ca * sg, ca* sb* cg + sa * sg, 0,
-        cb* sg, sa* sb* sg + ca * cg, ca* sb* sg - sa * cg, 0,
-        -sb, sa* cb, ca* cb, 0,
-        0, 0, 0, 1;
-}
-
-
-void calcInverseRotMatrix(Eigen::Matrix4d &hrm, const Vector3d &rotVec)
-{
-        double a{ rotVec.x() };
-        double b{ rotVec.y() };
-        double g{ rotVec.z() };
-        double sa = sin(a);
-        double sb = sin(b);
-        double sg = sin(g);
-        double ca = cos(a);
-        double cb = cos(b);
-        double cg = cos(g);
-
-        hrm << cb * cg, cb * sg, -sb, 0,
-        sa * sb * cg - ca * sg, sa * sb * sg + ca * cg, sa * cb , 0,
-        ca * sb * cg + sa * sg, ca * sb * sg - sa * cg, ca * cb, 0,
-        0, 0, 0, 1;
 }
 
 

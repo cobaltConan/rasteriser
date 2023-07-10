@@ -1,12 +1,13 @@
 #pragma once
 
+#include "boundingSphere.h"
 #include "objects.h"
 #include <vector>
 #include <array>
 #include <cmath>
 #include "../../libs/eigen/Eigen/Dense"
 #include <cmath>
-#include <iostream>
+#include <iostream> 
 
 using Eigen::Vector2d;
 using Eigen::Vector3d;
@@ -30,6 +31,4 @@ void renderObject(std::vector<Vector3d> verticies, std::vector<Triangle> triangl
 void renderTriangle(Triangle triangle, std::vector<Vector2d> projectedVerticies, PixelColourBuffer& pixelColourBuffer);
 void renderInstance(instance instance, PixelColourBuffer& pixelColourBuffer, const sceneInfo& sceneinfo, const cameraInfo& cameraInfo);
 void renderScene(scene scene, PixelColourBuffer& pixelColourBuffer, const sceneInfo& sceneInfo, const cameraInfo& cameraInfo);
-void calcRotMatrix(Eigen::Matrix4d& hrm, const Vector3d& rotVec);
-void calcInverseRotMatrix(Eigen::Matrix4d& hrm, const Vector3d& rotVec);
 void calcProjectionMatrix(const sceneInfo& sceneInfo, Eigen::Matrix<double, 3, 4>& projectionMatrix);

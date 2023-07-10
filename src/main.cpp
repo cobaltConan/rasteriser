@@ -1,14 +1,4 @@
-#include "graphics.h"
-#include "SDL2/SDL.h"
-#include "../../libs/eigen/Eigen/Dense"
-#include "objects.h"
-#include <SDL2/SDL_events.h>
-#include <SDL2/SDL_mouse.h>
-#include <iostream>
-#include <vector>
-#include <array>
-#include <stdexcept>
-#include <algorithm>
+#include "main.h"
 
 int main()
 {
@@ -46,7 +36,7 @@ int main()
     cameraInfo cameraInfo{};
     Vector3d cameraPos{};
     Vector3d cameraRot{};
-    double cameraSpeed{0.5};
+    double cameraSpeed{0.1};
 
     sceneInfo.screenHeight = height;
     sceneInfo.screenWidth = width;
@@ -108,30 +98,33 @@ int main()
                 switch(event.key.keysym.sym)
                 {
                     case SDLK_w:
-                        cameraPos.z() += cameraSpeed;
+                        cameraPos.x() -= cameraSpeed;
                         break;
 
                     case SDLK_s:
-                        cameraPos.z() -= cameraSpeed;
-                        break;
-
-                    case SDLK_d:
                         cameraPos.x() += cameraSpeed;
                         break;
 
+                    case SDLK_d:
+                        cameraPos.y() -= cameraSpeed;
+                        break;
+
                     case SDLK_a:
-                        cameraPos.x() -= cameraSpeed;
+                        cameraPos.y() += cameraSpeed;
                         break;
 
                     default:
                         break;
                 }
+
+                cameraInfo.setRotation(cameraPos);
             }
 
             if (event.type == SDL_MOUSEMOTION)
             {
-                cameraRot.y() += static_cast<double>(event.motion.xrel) / 75;
-                cameraRot.x() -= static_cast<double>(event.motion.yrel) / 75;
+                cameraRot.y() += static_cast<double>(event.motion.xrel) / 75.0;
+                cameraRot.x() -= static_cast<double>(event.motion.yrel) / 75.0;
+                cameraInfo.setRotation(cameraRot);
             }
 		}
 
@@ -139,8 +132,6 @@ int main()
 		//SDL_SetRenderDrawColor(pRenderer, 255, 255, 0, 255);
 		//SDL_RenderClear(pRenderer);
         
-        cameraInfo.setPosition(cameraPos);
-        cameraInfo.setRotation(cameraRot);
 
         theScene.instances.at(0).setRotation(Vector3d {rot, rot, 0});
         rot += 0.05;

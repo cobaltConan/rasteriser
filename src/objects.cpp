@@ -1,6 +1,4 @@
 #include "objects.h" 
-#include "graphics.h"
-#include <stdexcept>
 
 cube::cube()
 {

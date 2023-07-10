@@ -3,7 +3,7 @@ LOADLIBES = -lSDL2
 CXXFLAGS = -Wall -O0 -g
 
 
-SRC1 = objects.cpp graphics.cpp
+SRC1 = objects.cpp graphics.cpp boundingSphere.cpp linearAlgebra.cpp
 
 SRC2 = main.cpp
 

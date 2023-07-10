@@ -1,7 +1,9 @@
 #pragma once
 
+#include <stdexcept>
 #include <vector>
 #include "../../libs/eigen/Eigen/Dense"
+#include "linearAlgebra.h"
 
 using Eigen::Vector2d;
 using Eigen::Vector3d;
